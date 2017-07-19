@@ -5,7 +5,8 @@ Online help for kdb+
 Install
 -------
 
-Copy `help.q` into `$QHOME` folder. 
+1. Copy `help.q` into `$QHOME` folder. 
+2. ``q)\l help.q``
 
 
 Use
@@ -69,8 +70,8 @@ See `makehelp.q` and `texts/` to roll your own on-line help.
 To do
 -----
 
-[ ] Revise ```adverb`` to correspond with [code.kx.com/q/ref/adverbs](http://code.kx.com/q/ref/adverbs) 
-[ ] Revise ```verbs`` to correspond with [code.kx.com/q/ref/elements/#operators](http://code.kx.com/q/ref/elements/#operators) 
+- [ ] Revise ```adverb`` to correspond with [code.kx.com/q/ref/adverbs](http://code.kx.com/q/ref/adverbs) 
+- [ ] Revise ```verbs`` to correspond with [code.kx.com/q/ref/elements/#operators](http://code.kx.com/q/ref/elements/#operators) 
 
 
 Contact
