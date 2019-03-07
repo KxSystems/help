@@ -15,6 +15,7 @@ Use
 ---
 
 ```txt
+q)help `
 attributes| data attributes
 cmdline   | command line parameters
 data      | data types
