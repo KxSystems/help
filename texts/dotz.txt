@@ -1,48 +1,27 @@
-.z locale contents 
-.z.a       ip-address 
-.z.ac      http authenticate from cookie 
-.z.b       dependencies (more information than \b)
-.z.bm      callback on bad message
-.z.c       physical core count
-.z.d       utc date
-.z.D       local date
-.z.e       TLS connection status
-.z.exit    callback on exit 
-.z.ex      (in debugger) failing primitive
-.z.ey      (in debugger) failing primitive's arglist
-.z.f       startup file
-.z.h       hostname
-.z.i       pid
-.z.k       kdb+ releasedate 
-.z.K       kdb+ major version
-.z.l       license information (;expirydate;updatedate;;;)
-.z.n       utc timespan 
-.z.N       local timespan
-.z.o       OS 
-.z.p       utc timestamp
-.z.P       local timestamp 
-.z.pc[h]   close, h handle (already closed)
-.z.pg[x]   get
-.z.ph[x]   http get
-.z.pi[x]   input (qcon)
-.z.po[h]   open, h handle 
-.z.pp[x]   http post
-.z.ps[x]   set
-.z.pw[u;p] validate user and password
-.z.q       in quiet mode (no console)
-.z.s       self, current function definition
-.z.t       utc time
-.z.T       local time
-.z.ts[x]   timer expression (called every \t)
-.z.u       userid 
-.z.vs[v;i] value set
-.z.w       handle (0 for console, handle to remote for KIPC)
-.z.wc[h]   websocket close
-.z.wo[h]   websocket open 
-.z.ws[x]   callback for websockets 
-.z.W       openHandles!vectorOfMessageSizes (oldest first)
-.z.x       command line parameters (argc..)
-.z.X       raw command line 
-.z.z       utc timestamp
-.z.zd      default compression for set (blockSize;algo;zipLevel)
-.z.Z       local timestamp
+.z namespace: system information and callbacks
+System information                Callbacks
+.z.a    IP address                .z.ac    HTTP auth from cookie
+.z.b    dependencies              .z.bm    msg validator
+.z.c    cores                     .z.exit  action on exit
+.z.D/d  date shortcuts            .z.pc    close
+.z.e    TLS connection status     .z.pd    peach handles
+.z.ex   failed primitive          .z pg    get
+.z.ey   arg to failed primitive   .z.ph    HTTP get
+.z.f    file                      .z.pi    input
+.z.h    host                      .z.po    open
+.z.i    PID                       .z.pp    HTTP post
+.z.K    version                   .z.pq    qcon
+.z.k    release date              .z.ps    set
+.z.l    license                   .z.pw    validate user
+.z.N/n  local/UTC timespan        .z.ts    timer
+.z.o    OS version                .z.vs    value set
+.z.P/p  local/UTC timestamp       .z.wc    WebSocket close
+.z.pm   HTTP options              .z.wo    WebSocket open
+.z.q    quiet mode                .z.ws    WebSocket
+.z.s    self
+.z.T/t  time shortcuts
+.z.u    user ID
+.z.W/w  handles/handle
+.z.X/x  raw/parsed command line
+.z.Z/z  local/UTC datetime
+.z.zd   zip defaults

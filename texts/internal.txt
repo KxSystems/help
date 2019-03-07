@@ -1,4 +1,4 @@
-negative bang - -n!x - system calls
+negative bang - -n!x - internal system calls
 --n--wrapper-----------------------------------------------------------
  0N!         tee, output and return x
  -1! hsym    handle from sym x - ensures prefixed with :
@@ -18,7 +18,7 @@ negative bang - -n!x - system calls
 -12! .Q.host hostname from address x (.z.a)
 -13! .Q.attr address from hostname x
 -14!         escape " in string x (for csvs)
--15! md5     md5 for string x
+-15! md5     MD5 for string x
 -16!         reference count for x
 -17!         read0 kdb+ file x from "other" endian 
 -18!         compressed version of -8!
@@ -32,4 +32,4 @@ negative bang - -n!x - system calls
 -25!(handles;msg) async broadcast <msg> to multiple handles
 -26!()       TLS settings for current process
 -26!handle   TLS settings for handle
--29!x        json support internal
+-29!x        JSON support internal

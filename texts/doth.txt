@@ -1,0 +1,22 @@
+.h namespace: markup
+.h.br    linebreak                 .h.http      hyperlinks
+.h.c0    web color                 .h.hu        URI escape
+.h.c1    web color                 .h.hug       URI map
+.h.cd    CSV from data             .h.hy        HTTP response
+.h.code  code after Tab            .h.iso8601   ISO timestamp
+.h.data                            .h.jx        table
+.h.ed    Excel from data           .h.logo      Kx logo
+.h.edsn  Excel from tables         .h.nbr       no break
+.h.fram  frame                     .h.pre       pre
+.h.ha    anchor                    .h.sa        style
+.h.hb    anchor target             .h.sb        style
+.h.hc    escape lt                 .h.sc        URI-safe
+.h.he    HTTP 400                  .h.td        TSV
+.h.hn    HTTP error                .h.text      paragraphs
+.h.hp    HTTP response             .h.tx        filetypes
+.h.hr    horizontal rule           .h.ty        MIME types
+.h.ht    Marqdown to HTML          .h.uh        URI unescape
+.h.hta   start tag                 .h.xd        XML
+.h.htac  element                   .h.xmp       XMP
+.h.htc   element                   .h.xs        XML escape
+.h.html  document                  .h.xt        JSON

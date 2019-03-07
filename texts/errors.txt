@@ -1,74 +1,121 @@
 error messages
-runtime errors
-error--------example-----explanation
-access                   attempt to read files above directory, run system commands or failed usr/pwd
-accp                     tried to accept an incoming tcp/ip connection but failed to do so
-adict        d[::]:x     blocked assignment ('nyi) 
-arch                     attempt to load file of wrong endian format
-assign       cos:12      attempt to reuse a reserved word
-badtail                  incomplete transaction at end of logfile, get good (count;length) with -11!(-2;`:file)
-cast         `sym$`xxx   attempt to enumerate invalid value (`xxx not in sym in example) 
-conn                     too many incoming connections (1022 max)
-d8                       the log had a partial transaction at the end but q couldn't truncate the file.
-domain       !-1         out of domain
-elim                     more than 57 distinct enumerations 
-from         select a b  badly formed select statement
-glim                     limit on number of vectors with a `g# attribute, unlimited since 3.2 
-hwr                      handle write error, can't write inside a peach
-insert                   attempt to insert a record with a key that already exists 
-length       ()+!1       incompatible lengths
-limit        0W#2        tried to generate a list longer than 2,000,000,000           
-loop         a::a        dependency or transitive closure loop
-mismatch                 columns that can't be aligned for R,R or K,K 
-mlim                     limit on number of concurrently mapped nested vectors, currently 65530
-nyi                      not yet implemented
-noamend                  can't change global state inside an amend
-noupdate                 update not allowed when using negative port number
-nosocket                 can only open/use sockets in main thread 
-os                       operating system error
-parse                    invalid syntax
-part                     something wrong with the partitions in the hdb
-pl                       peach can't handle parallel lambda's (2.3 only)
-Q7                       nyi op on file nested array
-rank         +[2;3;4]    invalid rank or valence
-rb                       encountered a problem whilst doing a blocking read
-s-fail       `s#2 1      cannot apply `s# to data (not ascending values) 
-splay                    nyi op on splayed table
-stack        {.z.s[]}[]  ran out of stack space
-step                     attempt to upsert into stepped (`s#) dictionary 
-stop        	           user interrupt(ctrl-c) or time limit (-T)
-stype        '42         invalid type used to signal
-threadview               views can only be calculated from the main thread
-trunc                    the log had a partial transaction at the end but q couldn't truncate the file.
-type         til 2.2     wrong type
-u-fail       `u#1 1      cannot apply `u# to data (not unique values)
-unmappable               when saving partitioned data, each column must be mappable
-value                    no value
-vd1                      attempted multithread update
-view                     trying to re-assign a view to something else
-wsfull                   malloc failed. ran out of swap (or addressability on 32bit). or hit -w limit.
-XXX                      value error (XXX undefined) 
+Runtime errors
+error------------example------------------------------explanation----------------------------------------------------------
+access                                                Attempt to read files above directory, run system commands or failed usr/pwd
+accp                                                  Tried to accept an incoming TCP/IP connection but failed to do so
+adict            d[::]:x                              Blocked assignment ('nyi)
+arch             `:test set til 100                   Attempt to load file of wrong endian format
+                 -17!`:test
+assign           cos:12                               Attempt to redefine a reserved word
+badtail                                               Incomplete transaction at end of file, get good (count;length) with -11!(-2;`:file)
+can't                                                 Only commercially licensed kdb+ instances can encrypt code in a script
+cast              s:`a`b; c:`s$`a`e                   Value not in enumeration
+con                                                   qcon client is not supported when kdb+ is in multithreaded input mode
+cond                                                  Even number of arguments to $
+conn                                                  Too many connections (1022 max)
+Could not                                             -26! found SSL/TLS not enabled
+initialize ssl
+d8                                                    The log had a partial transaction at the end but q couldn't truncate the file
+domain            til -1                              Out of domain
+elim              ((-58?`3) set \:(),`a)$`a            Too many enumerations (max: 57)
+enable slave       \s 4                                Command line enabled processes for parallel processing
+threads via cmd
+line -s only
+failed to load                                        Started kdb+ with -E 1 or -E 2 but without SSL/TLS enabled
+TLS certificates
+from              select price trade                  Badly formed select statement
+glim                                                  `g# limit (99 prior to V3.2, now unlimited
+hop                                                   Request to hopen a handle fails; includes message from OS
+hwr                                                   Handle write error, can't write inside a peach
+IJS                "D= \001 "0: "0=hello \0011=world "      Key type is not I, J, or S.
+insert            t:([k:0 1]a:2 3);`t insert(0;3)     Attempt to insert a record with an existing key into a keyed table
+length            ()+til 1                            Incompatible lengths
 
-system (file and ipc) errors
-XXX:YYY                  XXX is from kdb+, YYY from the OS
-XXX from addr, close, conn, p(from -p), snd, rcv or (invalid) filename (read0`:invalidname.txt)
+limit             0W#2                                Tried to generate a list longer than 2e9 or serialized object is  >1TB (2GB until V3.4), or 'type if trying to serialize a nested object which has > 2 billion elements, or parse errors
+loop              a::a                                Dependency loop
+mismatch          ([]a:til 4),([]b:til 3)             Columns that can't be aligned for R,R or K,K
+Mlim                                                  Too many nested columns in splayed tables. (Prior to V3.0, limited to 999; from V3.0, 251; from V3.3, 65530)
+mq                                                    Multi-threading not allowed
+name too long                                         Filepath ≥100 chars (until V3.6 2018.09.26)
+noamend           t:([]a:1 2 3)                       Cannot change global state from within an amend
+                  n:`a`b`c
+                  update b:{`n?`d;:`n?`d}[]
+                  from `t
+no append to      V2:                                 Cannot append to zipped enum (from V3.0)
+zipped enums      .z.zd:17 2 6
+                  `:sym?`a`b
+                  V3:
+                  `:sym?`c
+no `g#            {`g#x}peach 2#enlist 0 1            A thread other than the main q thread has attempted to add a group attribute to a vector. Seen with peach+slave threads or multithreaded input queue
+noupdate          {a::x}peach 0 1                     Updates blocked by the -b cmd line arg, or reval code or a thread other than the main thread has attempted to update a global variable when in peach+slave threads or multithreaded input queue. Update not allowed when using -ve port number.
+nosocket                                              Can only open or use sockets in main thread.
+nyi                "a "like "** "                         Not yet implemented: probably makes sense, but not defined nor implemented
+os                 \foo bar                            Operating-system error or license error
+par                                                   Unsupported operation on a partitioned table or component thereof
+parse                                                 Invalid syntax
+part                                                  Something wrong with the partitions in the HDB
+path too long     (`$ ": ",1000# "a ") set 1 2 3          File path ≥255 chars (100 before V3.6 2018.09.26)
+pl                                                    peach can't handle parallel lambdas (V2.3 only)
+pwuid                                                 OS is missing libraries for getpwuid. Most likely 32-bit app on 64-bit OS
+Q7                                                    nyi op on file nested array
+rank              +[2;3;4]                            Invalid rank
+rb                                                    Encountered a problem while doing a blocking read
+restricted        0 "2+3 "                              in a kdb+ process which was started with -b cmd line. Also for a kdb+ process using the username:password authentication file, or the -b cmd line option,  \x cannot be used to reset handlers to their default. e.g.  \x .z.pg
+s-fail            `s#3 2                              Invalid attempt to set sorted attribute. Also encountered with `s#enums when loading a database ( \l db) and enum target is not already loaded.
+splay                                                 nyi op on splayed table
+stack              {.z.s[]}[]                         Ran out of stack space
+step               d:`s#`a`b!1 2;`d upsert `c`d!3 4   Attempt to upsert a step dictionary in place
+stop                                                  User interrupt (Ctrl-c) or time limit (-T)
+stype              '42                                Invalid type used for Signal
+sys                {system  "ls "}peach 0 1             Using system call from thread other than main thread
+threadview                                            Trying to calc a view in a thread other than main thread
+timeout                                               Request to hopen a handle fails on a timeout; includes message from OS
+TLS not enabled                                       Received a TLS connection request, but kdb+ not started with -E 1 or -E 2
+too many syms                                         Kdb+ currently allows for ~1.4B interned symbols in the pool and will exit with this error when this threshold is reached
+trunc                                                 The log had a partial transaction at the end but q couldn't truncate the file
+type               til 2.2                            Wrong type. Also see 'limit
+type/attr error                                       Direct update on disk for this type or attribute is not allowed
+amending file
+u-fail             `u#2 2                             Invalid attempt to set 'unique' attribute
+unmappable         t:([]sym:`a`b;a:(();()))           When saving partitioned data each column must be mappable. () and ( " "; " "; " ") are OK
+                   .Q.dpft[`:thdb;.z.d;`sym;`t]
+upd                                                   Function upd is undefined (sometimes encountered during -11!`:logfile) or license error
+utf8                                                  The websocket requires that text is UTF-8 encoded
+value                                                 No value
+vd1                                                   Attempted multithread update
+view                                                  Trying to re-assign a view to something else
+wsfull              999999999#0j                      malloc failed, ran out of swap (or addressability on 32-bit), or hit -w limit
+wsm                 010b wsum 010b                    Alias for nyi for wsum prior to V3.2
+XXX                 delete x from system  "d ";x        Value error (XXX undefined)
 
-parse errors (execute or load)
-[/(/{/]/)/}/"            open ([{ or "
-branch                   a branch(if;do;while;$[.;.;.]) more than 255 byte codes away
-char                     invalid character
-constants                too many constants (max 96)
-globals                  too many global variables (32 max)
-locals                   too many local variables (24 max)
-params                   too many parameters (8 max)
+System errors (from file ops and IPC)
+error------------example------------------------------explanation----------------------------------------------------------
+XXX:YYY                                               XXX is from kdb+, YYY from the OS
 
-license errors
-cores                    too many cores
-exp                      expiry date passed
-host                     unlicensed host
-k4.lic                   k4.lic file not found, check QHOME/QLIC
-os                       unlicensed OS
-srv                      attempt to use client-only license in server mode 
-upd                      attempt to use version of kdb+ more recent than update date
-user                     unlicensed user
-wha                      invalid system date
+Parse errors (on execute or load)
+error------------example------------------------------explanation----------------------------------------------------------
+[({])} "           "hello                               Open ([{ or  "
+branch           a: "1; ",65024# "0; "                    A branch (if;do;while;$[.;.;.]) more than 65025 byte codes away (255 before V3.6 2017.09.26)
+                 value  "{if[ ",a, "]} "
+char             value  " \000 "                         Invalid character
+globals          a: "::a "sv string til 111;            Too many global variables
+                 value "{a ",a, "::0} "
+limit            a: "; "sv string 2+til 241;            Too many constants, or limit error
+                 value "{ ",a, "} "
+locals           a: ":a "sv string til 111;             Too many local variables
+                 value "{a ",a, ":0} "
+params           f:{[a;b;c;d;e;f;g;h;e]}              Too many parameters (8 max)
+
+License errors (on launch)
+error------explanation----------------------------------------------------------
+cores      The license is for fewer cores than available
+cpu        The license is for fewer CPUs than available
+exp        License expiry date is prior to system date
+host       The hostname reported by the OS does not match the hostname or hostname-pattern in the license
+k4.lic     k4.lic file not found
+os         Wrong OS or operating-system error (if runtime error)
+srv        Client-only license in server mode
+upd        Version of kdb+ more recent than update date, or function upd undefined
+user       Unlicenced user
+wha        System date is prior to kdb+ version date
+q)

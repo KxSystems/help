@@ -1,0 +1,13 @@
+iterators (formerly adverbs)
+map iterators
+'    Each           v1 each x    x v2'y       v3[x;y;z]
+/:   Each Right                  x v2/:y
+\:   Each Left                   x v2\:y
+':   Each Parallel  v1 peach x
+':   Each Prior                  v2 prior y
+'    Case           int'[x;y;z...]
+accumulating iterators
+\    Scan           v1 scan x                             Converge, Do, While
+/    Over                         x v2/y      v3/[x;y;z]  MapReduce
+\    Scan                         x v2\y      v3\[x;y;z]  Fold
+/    Over           v1 over x                             Converge, Do, While

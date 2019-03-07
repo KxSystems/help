@@ -1,0 +1,39 @@
+.Q namespace: utilities
+General                                      Database
+ .Q.addmonths                                 .Q.chk     fill HDB
+ .Q.dd       join symbols                     .Q.dpft    save table
+ .Q.def                                       .Q.dsftg   load process save
+ .Q.f        format                           .Q.en      enumerate varchar cols
+ .Q.fc       parallel on cut                  .Q.fps     streaming algorithm
+ .Q.ff       append columns                   .Q.fs      streaming algorithm
+ .Q.fk       foreign key                      .Q.fsn     streaming algorithm
+ .Q.fmt      format                           .Q.hdpf    save tables
+ .Q.ft       apply simple                     .Q.qt      is table
+ .Q.fu       apply unique                     .Q.qp      is partitioned
+ .Q.gc       garbage collect
+ .Q.id       sanitize                         Partitioned database state
+ .Q.s        plain text                       .Q.cn      count partitioned table
+ .Q.V        table to dict                    .Q.bv      build vp
+ .Q.v        value                            .Q.ind     partitioned index
+ .Q.view     subview                          .Q.MAP     maps partitions
+                                              .Q.par     locate partition
+Environment                                   .Q.PD      partition locations
+ .Q.k        version                          .Q.pd      modified partition locations
+ .Q.opt      command parameters               .Q.pf      partition type
+ .Q.res      k words                          .Q.pn      partition counts
+ .Q.w        memory stats                     .Q.pt      partitioned tables
+ .Q.x        non-command parameters           .Q.PV      partition values
+                                              .Q.pv      modified partition values
+IPC                                           .Q.vp      missing partitions
+ .Q.addr     IP address
+ .Q.hg       HTTP get                         Segmented database state
+ .Q.host     hostname                         .Q.D       partitions
+ .Q.hp       HTTP post                        .Q.P       segments
+                                              .Q.u       date based
+Datatype
+ .Q.j10      encode binhex                   File I/O
+ .Q.j12      encode base64                    .Q.l        load
+ .Q.M        long infinity                    .Q.Cf       create empty nested char file
+ .Q.ty       type                             .Q.Xf       create file
+ .Q.x10      decode binhex
+ .Q.x12      decode base64

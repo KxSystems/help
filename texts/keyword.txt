@@ -1,0 +1,23 @@
+keywords (functions)
+A	 abs acos aj aj0 all and any asc asin asof atan attr avg avgs
+B	 bin binr
+C	 ceiling cols cor cos count cov cross csv cut
+D	 delete deltas desc dev differ distinct div do dsave
+E	 each ej ema enlist eval except exec exit exp
+F	 fby fills first fkeys flip floor
+G	 get getenv group gtime
+H	 hclose hcount hdel hopen hsym
+I	 iasc idesc if ij ijf in insert inter inv
+K	 key keys
+L	 last like lj ljf load log lower lsq ltime ltrim
+M	 mavg max maxs mcount md5 mdev med meta min mins mmax mmin mmu mod msum
+N	 neg next not null
+O	 or over
+P	 parse peach pj prd prds prev prior
+R	 rand rank ratios raze read0 read1 reciprocal reval reverse rload rotate rsave rtrim
+S	 save scan scov sdev select set setenv show signum sin sqrt ss ssr string sublist sum sums sv svar system
+T	 tables tan til trim type
+U	 uj ujf ungroup union update upper upsert
+V	 value var view views vs
+W	 wavg where while within wj wj1 wsum
+X	 xasc xbar xcol xcols xdesc xexp xgroup xkey xlog xprev xrank

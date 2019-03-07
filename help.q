@@ -1,17 +1,8 @@
-/ help.q 2017.04.06T14:38:50.409
+/ help.q 2019.03.07T17:15:09.238
 \d .help
 DIR:TXT:()!()
 display:{if[not 10h=abs type x;x:string x];$[1=count i:where(key DIR)like x,"*";-1 each TXT[(key DIR)[i]];show DIR];}
 fetch:{if[not 10h=abs type x;x:string x];$[1=count i:where(key DIR)like x,"*";1_raze"\n",'TXT[(key DIR)[first i]];DIR]}
-TXT,:(enlist`adverb)!enlist(
- "'    eachboth    each";
- "/    [x]over     over(:+*&|,)   [x]do/while";
- "\\    [x]scan     scan(:+*&|,)   [x]do\\while";
- "':   [x]prior    prior(:-%)";
- "/:   eachright   sv(i:i/:I s:`/:S C:c/:L) j:0x40/:X i:0x0/:X";
- "\\:   eachleft    vs(I:i\\:i S:`\\:s L:c\\:C) X:0x40\\:j X:0x0\\:i"
- )
-DIR,:(enlist`adverb)!enlist`$"adverbs/operators"
 TXT,:(enlist`attributes)!enlist(
  "example           overhead ";
  "`s#2 2 3 sorted   0 ";
@@ -59,45 +50,54 @@ TXT,:(enlist`cmdline)!enlist(
  )
 DIR,:(enlist`cmdline)!enlist`$"command line parameters"
 TXT,:(enlist`data)!enlist(
- "char-size--type-literal--------------q---------sql--------java-------.net---  ";
- "b    1     1    0b                   boolean              Boolean    boolean   ";
- "g    16    2    0Ng                  guid                 UUID       GUID";
- "x    1     4    0x0                  byte                 Byte       byte      ";
- "h    2     5    0h                   short     smallint   Short      int16     ";
- "i    4     6    0                    int       int        Integer    int32     ";
- "j    8     7    0j                   long      bigint     Long       int64     ";
- "e    4     8    0e                   real      real       Float      single    ";
- "f    8     9    0.0                  float     float      Double     double    ";
- "c    1     10   \" \"                  char                 Character  char";
- "s    .     11   `                    symbol    varchar    String     string    ";
- "p    8     12   dateDtimespan        timestamp";
- "m    4     13   2000.01m             month";
- "d    4     14   2000.01.01           date      date       Date                 ";
- "z    8     15   dateTtime            datetime  timestamp  Timestamp  DateTime";
- "n    8     16   0D00:00:00.000000000 timespan";
- "u    4     17   00:00                minute";
- "v    4     18   00:00:00             second";
- "t    4     19   00:00:00.000         time      time       Time       TimeSpan ";
- "*    4     20.. `s$`                 enum";
- "           98                        table";
- "           99                        dict";
- "           100                       lambda";
- "           101                       unary prim";
- "           102                       binary prim";
- "           103                       ternary(operator)";
- "           104                       projection";
- "           105                       composition";
- "           106                       f'";
- "           107                       f/";
- "           108                       f\\";
- "           109                       f':";
- "           110                       f/:";
- "           111                       f\\:";
- "           112                       dynamic load";
+ "n-----c----name-------sz----literal------------null-----inf-----SQL--------Java-------.Net";
+ "0     *    list";
+ "1     b    boolean    1     0b                                             Boolean    boolean";
+ "2     g    guid       16                        0Ng                        UUID       GUID";
+ "4     x    byte       1     0x00                                           Byte       byte";
+ "5     h    short      2     0h                  0Nh     0Wh     smallint   Short      int16";
+ "6     i    int        4     0i                  0Ni     0Wi     int        Integer    int32";
+ "7     j    long       8     0j or 0             0Nj     0Wj     bigint     Long       int64";
+ "                                                or 0N   or 0W";
+ "8     e    real       4     0e                  0Ne     0We     real       Float      single";
+ "9     f    float      8     0.0 or 0f           0n      0w      float      Double     double";
  "";
- "the nested types are 77+t (e.g. 78 is boolean. 96 is time.)";
+ "11    s    symbol           `                   `               varchar    String     string";
+ "12    p    timestamp  8     `dateDtimespan      0Np     0Wp                Timestamp  DateTime (RW)";
+ "13    m    month      4     2000.01m            0Nm";
+ "14    d    date       4     2000.01.01          0Nd     0Wd     date       Date";
+ "15    z    datetime   8     dateTtime           0Nz     0wz     timestamp  Timestamp  DateTime (RO)";
+ "16    n    timespan   8     00:00:00.000000000  0Nn     0Wn                Timespan   TimeSpan";
+ "17    u    minute     4     00:00               0Nu     0Wu";
+ "18    v    second     4     00:00:00            0Nv     0Nv";
+ "19    t    time       4     00:00:00.000        0Nt     0Wt     time       Time       TimeSpan";
+ "20-76      enums";
+ "77         anymap";
+ "78-96      77+t \342\200\223 mapped list of lists of type t";
+ "97         nested sym enum";
+ "98         table";
+ "99         dictionary";
+ "100        lambda";
+ "101        unary primitive";
+ "102        operator";
+ "103        iterator";
+ "104        projection";
+ "105        composition";
+ "106        f'";
+ "107        f/";
+ "108        f\\";
+ "109        f':";
+ "110        f/:";
+ "111        f\\:";
+ "112        dynamic load";
  "";
- "`char$data `CHAR$string";
+ "n: short int returned by type and used for casting, e.g. 9h$3";
+ "c: character used lower-case for casting and upper-case for Load CSV";
+ "sz: size in bytes";
+ "inf: infinity (no math on temporal types); 0Wh is 32767h";
+ "RO: read only; RW: read-write";
+ "";
+ "Cast:`char$data `CHAR$string";
  "";
  "The int, float, char and symbol literal nulls are: 0N 0n \" \" `.";
  "The rest use type extensions, e.g. 0Nd. No null for boolean or byte.";
@@ -152,56 +152,104 @@ TXT,:(enlist`define)!enlist(
  "or g is a monadic function called with error text"
  )
 DIR,:(enlist`define)!enlist`$"assign, define, control and debug"
-TXT,:(enlist`dotz)!enlist(
- ".z.a       ip-address ";
- ".z.ac      http authenticate from cookie ";
- ".z.b       dependencies (more information than \\b)";
- ".z.bm      callback on bad message";
- ".z.c       physical core count";
- ".z.d       utc date";
- ".z.D       local date";
- ".z.e       TLS connection status";
- ".z.exit    callback on exit ";
- ".z.ex      (in debugger) failing primitive";
- ".z.ey      (in debugger) failing primitive's arglist";
- ".z.f       startup file";
- ".z.h       hostname";
- ".z.i       pid";
- ".z.k       kdb+ releasedate ";
- ".z.K       kdb+ major version";
- ".z.l       license information (;expirydate;updatedate;;;)";
- ".z.n       utc timespan ";
- ".z.N       local timespan";
- ".z.o       OS ";
- ".z.p       utc timestamp";
- ".z.P       local timestamp ";
- ".z.pc[h]   close, h handle (already closed)";
- ".z.pg[x]   get";
- ".z.ph[x]   http get";
- ".z.pi[x]   input (qcon)";
- ".z.po[h]   open, h handle ";
- ".z.pp[x]   http post";
- ".z.ps[x]   set";
- ".z.pw[u;p] validate user and password";
- ".z.q       in quiet mode (no console)";
- ".z.s       self, current function definition";
- ".z.t       utc time";
- ".z.T       local time";
- ".z.ts[x]   timer expression (called every \\t)";
- ".z.u       userid ";
- ".z.vs[v;i] value set";
- ".z.w       handle (0 for console, handle to remote for KIPC)";
- ".z.wc[h]   websocket close";
- ".z.wo[h]   websocket open ";
- ".z.ws[x]   callback for websockets ";
- ".z.W       openHandles!vectorOfMessageSizes (oldest first)";
- ".z.x       command line parameters (argc..)";
- ".z.X       raw command line ";
- ".z.z       utc timestamp";
- ".z.zd      default compression for set (blockSize;algo;zipLevel)";
- ".z.Z       local timestamp"
+TXT,:(enlist`doth)!enlist(
+ ".h.br    linebreak                 .h.http      hyperlinks";
+ ".h.c0    web color                 .h.hu        URI escape";
+ ".h.c1    web color                 .h.hug       URI map";
+ ".h.cd    CSV from data             .h.hy        HTTP response";
+ ".h.code  code after Tab            .h.iso8601   ISO timestamp";
+ ".h.data                            .h.jx        table";
+ ".h.ed    Excel from data           .h.logo      Kx logo";
+ ".h.edsn  Excel from tables         .h.nbr       no break";
+ ".h.fram  frame                     .h.pre       pre";
+ ".h.ha    anchor                    .h.sa        style";
+ ".h.hb    anchor target             .h.sb        style";
+ ".h.hc    escape lt                 .h.sc        URI-safe";
+ ".h.he    HTTP 400                  .h.td        TSV";
+ ".h.hn    HTTP error                .h.text      paragraphs";
+ ".h.hp    HTTP response             .h.tx        filetypes";
+ ".h.hr    horizontal rule           .h.ty        MIME types";
+ ".h.ht    Marqdown to HTML          .h.uh        URI unescape";
+ ".h.hta   start tag                 .h.xd        XML";
+ ".h.htac  element                   .h.xmp       XMP";
+ ".h.htc   element                   .h.xs        XML escape";
+ ".h.html  document                  .h.xt        JSON"
  )
-DIR,:(enlist`dotz)!enlist`$".z locale contents "
+DIR,:(enlist`doth)!enlist`$".h namespace: markup"
+TXT,:(enlist`dotj)!enlist(
+ ".j.j     serialize                 .j.k         deserialize"
+ )
+DIR,:(enlist`dotj)!enlist`$".j namespace: JSON"
+TXT,:(enlist`dotq)!enlist(
+ "General                                      Database";
+ " .Q.addmonths                                 .Q.chk     fill HDB";
+ " .Q.dd       join symbols                     .Q.dpft    save table";
+ " .Q.def                                       .Q.dsftg   load process save";
+ " .Q.f        format                           .Q.en      enumerate varchar cols";
+ " .Q.fc       parallel on cut                  .Q.fps     streaming algorithm";
+ " .Q.ff       append columns                   .Q.fs      streaming algorithm";
+ " .Q.fk       foreign key                      .Q.fsn     streaming algorithm";
+ " .Q.fmt      format                           .Q.hdpf    save tables";
+ " .Q.ft       apply simple                     .Q.qt      is table";
+ " .Q.fu       apply unique                     .Q.qp      is partitioned";
+ " .Q.gc       garbage collect";
+ " .Q.id       sanitize                         Partitioned database state";
+ " .Q.s        plain text                       .Q.cn      count partitioned table";
+ " .Q.V        table to dict                    .Q.bv      build vp";
+ " .Q.v        value                            .Q.ind     partitioned index";
+ " .Q.view     subview                          .Q.MAP     maps partitions";
+ "                                              .Q.par     locate partition";
+ "Environment                                   .Q.PD      partition locations";
+ " .Q.k        version                          .Q.pd      modified partition locations";
+ " .Q.opt      command parameters               .Q.pf      partition type";
+ " .Q.res      k words                          .Q.pn      partition counts";
+ " .Q.w        memory stats                     .Q.pt      partitioned tables";
+ " .Q.x        non-command parameters           .Q.PV      partition values";
+ "                                              .Q.pv      modified partition values";
+ "IPC                                           .Q.vp      missing partitions";
+ " .Q.addr     IP address";
+ " .Q.hg       HTTP get                         Segmented database state";
+ " .Q.host     hostname                         .Q.D       partitions";
+ " .Q.hp       HTTP post                        .Q.P       segments";
+ "                                              .Q.u       date based";
+ "Datatype";
+ " .Q.j10      encode binhex                   File I/O";
+ " .Q.j12      encode base64                    .Q.l        load";
+ " .Q.M        long infinity                    .Q.Cf       create empty nested char file";
+ " .Q.ty       type                             .Q.Xf       create file";
+ " .Q.x10      decode binhex";
+ " .Q.x12      decode base64"
+ )
+DIR,:(enlist`dotq)!enlist`$".Q namespace: utilities"
+TXT,:(enlist`dotz)!enlist(
+ "System information                Callbacks";
+ ".z.a    IP address                .z.ac    HTTP auth from cookie";
+ ".z.b    dependencies              .z.bm    msg validator";
+ ".z.c    cores                     .z.exit  action on exit";
+ ".z.D/d  date shortcuts            .z.pc    close";
+ ".z.e    TLS connection status     .z.pd    peach handles";
+ ".z.ex   failed primitive          .z pg    get";
+ ".z.ey   arg to failed primitive   .z.ph    HTTP get";
+ ".z.f    file                      .z.pi    input";
+ ".z.h    host                      .z.po    open";
+ ".z.i    PID                       .z.pp    HTTP post";
+ ".z.K    version                   .z.pq    qcon";
+ ".z.k    release date              .z.ps    set";
+ ".z.l    license                   .z.pw    validate user";
+ ".z.N/n  local/UTC timespan        .z.ts    timer";
+ ".z.o    OS version                .z.vs    value set";
+ ".z.P/p  local/UTC timestamp       .z.wc    WebSocket close";
+ ".z.pm   HTTP options              .z.wo    WebSocket open";
+ ".z.q    quiet mode                .z.ws    WebSocket";
+ ".z.s    self";
+ ".z.T/t  time shortcuts";
+ ".z.u    user ID";
+ ".z.W/w  handles/handle";
+ ".z.X/x  raw/parsed command line";
+ ".z.Z/z  local/UTC datetime";
+ ".z.zd   zip defaults"
+ )
+DIR,:(enlist`dotz)!enlist`$".z namespace: system information and callbacks"
 TXT,:(enlist`envvar)!enlist(
  "var---default---use-------------------------------------------------";
  "QHOME $HOME/q   folder searched for q.k and unqualified script names";
@@ -219,81 +267,205 @@ TXT,:(enlist`envvar)!enlist(
  )
 DIR,:(enlist`envvar)!enlist`$"envvar - environment variables "
 TXT,:(enlist`errors)!enlist(
- "runtime errors";
- "error--------example-----explanation";
- "access                   attempt to read files above directory, run system commands or failed usr/pwd";
- "accp                     tried to accept an incoming tcp/ip connection but failed to do so";
- "adict        d[::]:x     blocked assignment ('nyi) ";
- "arch                     attempt to load file of wrong endian format";
- "assign       cos:12      attempt to reuse a reserved word";
- "badtail                  incomplete transaction at end of logfile, get good (count;length) with -11!(-2;`:file)";
- "cast         `sym$`xxx   attempt to enumerate invalid value (`xxx not in sym in example) ";
- "conn                     too many incoming connections (1022 max)";
- "d8                       the log had a partial transaction at the end but q couldn't truncate the file.";
- "domain       !-1         out of domain";
- "elim                     more than 57 distinct enumerations ";
- "from         select a b  badly formed select statement";
- "glim                     limit on number of vectors with a `g# attribute, unlimited since 3.2 ";
- "hwr                      handle write error, can't write inside a peach";
- "insert                   attempt to insert a record with a key that already exists ";
- "length       ()+!1       incompatible lengths";
- "limit        0W#2        tried to generate a list longer than 2,000,000,000           ";
- "loop         a::a        dependency or transitive closure loop";
- "mismatch                 columns that can't be aligned for R,R or K,K ";
- "mlim                     limit on number of concurrently mapped nested vectors, currently 65530";
- "nyi                      not yet implemented";
- "noamend                  can't change global state inside an amend";
- "noupdate                 update not allowed when using negative port number";
- "nosocket                 can only open/use sockets in main thread ";
- "os                       operating system error";
- "parse                    invalid syntax";
- "part                     something wrong with the partitions in the hdb";
- "pl                       peach can't handle parallel lambda's (2.3 only)";
- "Q7                       nyi op on file nested array";
- "rank         +[2;3;4]    invalid rank or valence";
- "rb                       encountered a problem whilst doing a blocking read";
- "s-fail       `s#2 1      cannot apply `s# to data (not ascending values) ";
- "splay                    nyi op on splayed table";
- "stack        {.z.s[]}[]  ran out of stack space";
- "step                     attempt to upsert into stepped (`s#) dictionary ";
- "stop        \t           user interrupt(ctrl-c) or time limit (-T)";
- "stype        '42         invalid type used to signal";
- "threadview               views can only be calculated from the main thread";
- "trunc                    the log had a partial transaction at the end but q couldn't truncate the file.";
- "type         til 2.2     wrong type";
- "u-fail       `u#1 1      cannot apply `u# to data (not unique values)";
- "unmappable               when saving partitioned data, each column must be mappable";
- "value                    no value";
- "vd1                      attempted multithread update";
- "view                     trying to re-assign a view to something else";
- "wsfull                   malloc failed. ran out of swap (or addressability on 32bit). or hit -w limit.";
- "XXX                      value error (XXX undefined) ";
+ "Runtime errors";
+ "error------------example------------------------------explanation----------------------------------------------------------";
+ "access                                                Attempt to read files above directory, run system commands or failed usr/pwd";
+ "accp                                                  Tried to accept an incoming TCP/IP connection but failed to do so";
+ "adict            d[::]:x                              Blocked assignment ('nyi)";
+ "arch             `:test set til 100                   Attempt to load file of wrong endian format";
+ "                 -17!`:test";
+ "assign           cos:12                               Attempt to redefine a reserved word";
+ "badtail                                               Incomplete transaction at end of file, get good (count;length) with -11!(-2;`:file)";
+ "can't                                                 Only commercially licensed kdb+ instances can encrypt code in a script";
+ "cast              s:`a`b; c:`s$`a`e                   Value not in enumeration";
+ "con                                                   qcon client is not supported when kdb+ is in multithreaded input mode";
+ "cond                                                  Even number of arguments to $";
+ "conn                                                  Too many connections (1022 max)";
+ "Could not                                             -26! found SSL/TLS not enabled";
+ "initialize ssl";
+ "d8                                                    The log had a partial transaction at the end but q couldn't truncate the file";
+ "domain            til -1                              Out of domain";
+ "elim              ((-58?`3) set \\:(),`a)$`a            Too many enumerations (max: 57)";
+ "enable slave       \\s 4                                Command line enabled processes for parallel processing";
+ "threads via cmd";
+ "line -s only";
+ "failed to load                                        Started kdb+ with -E 1 or -E 2 but without SSL/TLS enabled";
+ "TLS certificates";
+ "from              select price trade                  Badly formed select statement";
+ "glim                                                  `g# limit (99 prior to V3.2, now unlimited";
+ "hop                                                   Request to hopen a handle fails; includes message from OS";
+ "hwr                                                   Handle write error, can't write inside a peach";
+ "IJS                \"D= \\001 \"0: \"0=hello \\0011=world \"      Key type is not I, J, or S.";
+ "insert            t:([k:0 1]a:2 3);`t insert(0;3)     Attempt to insert a record with an existing key into a keyed table";
+ "length            ()+til 1                            Incompatible lengths";
  "";
- "system (file and ipc) errors";
- "XXX:YYY                  XXX is from kdb+, YYY from the OS";
- "XXX from addr, close, conn, p(from -p), snd, rcv or (invalid) filename (read0`:invalidname.txt)";
+ "limit             0W#2                                Tried to generate a list longer than 2e9 or serialized object is  >1TB (2GB until V3.4), or 'type if trying to serialize a nested object which has > 2 billion elements, or parse errors";
+ "loop              a::a                                Dependency loop";
+ "mismatch          ([]a:til 4),([]b:til 3)             Columns that can't be aligned for R,R or K,K";
+ "Mlim                                                  Too many nested columns in splayed tables. (Prior to V3.0, limited to 999; from V3.0, 251; from V3.3, 65530)";
+ "mq                                                    Multi-threading not allowed";
+ "name too long                                         Filepath \342\211\245100 chars (until V3.6 2018.09.26)";
+ "noamend           t:([]a:1 2 3)                       Cannot change global state from within an amend";
+ "                  n:`a`b`c";
+ "                  update b:{`n?`d;:`n?`d}[]";
+ "                  from `t";
+ "no append to      V2:                                 Cannot append to zipped enum (from V3.0)";
+ "zipped enums      .z.zd:17 2 6";
+ "                  `:sym?`a`b";
+ "                  V3:";
+ "                  `:sym?`c";
+ "no `g#            {`g#x}peach 2#enlist 0 1            A thread other than the main q thread has attempted to add a group attribute to a vector. Seen with peach+slave threads or multithreaded input queue";
+ "noupdate          {a::x}peach 0 1                     Updates blocked by the -b cmd line arg, or reval code or a thread other than the main thread has attempted to update a global variable when in peach+slave threads or multithreaded input queue. Update not allowed when using -ve port number.";
+ "nosocket                                              Can only open or use sockets in main thread.";
+ "nyi                \"a \"like \"** \"                         Not yet implemented: probably makes sense, but not defined nor implemented";
+ "os                 \\foo bar                            Operating-system error or license error";
+ "par                                                   Unsupported operation on a partitioned table or component thereof";
+ "parse                                                 Invalid syntax";
+ "part                                                  Something wrong with the partitions in the HDB";
+ "path too long     (`$ \": \",1000# \"a \") set 1 2 3          File path \342\211\245255 chars (100 before V3.6 2018.09.26)";
+ "pl                                                    peach can't handle parallel lambdas (V2.3 only)";
+ "pwuid                                                 OS is missing libraries for getpwuid. Most likely 32-bit app on 64-bit OS";
+ "Q7                                                    nyi op on file nested array";
+ "rank              +[2;3;4]                            Invalid rank";
+ "rb                                                    Encountered a problem while doing a blocking read";
+ "restricted        0 \"2+3 \"                              in a kdb+ process which was started with -b cmd line. Also for a kdb+ process using the username:password authentication file, or the -b cmd line option,  \\x cannot be used to reset handlers to their default. e.g.  \\x .z.pg";
+ "s-fail            `s#3 2                              Invalid attempt to set sorted attribute. Also encountered with `s#enums when loading a database ( \\l db) and enum target is not already loaded.";
+ "splay                                                 nyi op on splayed table";
+ "stack              {.z.s[]}[]                         Ran out of stack space";
+ "step               d:`s#`a`b!1 2;`d upsert `c`d!3 4   Attempt to upsert a step dictionary in place";
+ "stop                                                  User interrupt (Ctrl-c) or time limit (-T)";
+ "stype              '42                                Invalid type used for Signal";
+ "sys                {system  \"ls \"}peach 0 1             Using system call from thread other than main thread";
+ "threadview                                            Trying to calc a view in a thread other than main thread";
+ "timeout                                               Request to hopen a handle fails on a timeout; includes message from OS";
+ "TLS not enabled                                       Received a TLS connection request, but kdb+ not started with -E 1 or -E 2";
+ "too many syms                                         Kdb+ currently allows for ~1.4B interned symbols in the pool and will exit with this error when this threshold is reached";
+ "trunc                                                 The log had a partial transaction at the end but q couldn't truncate the file";
+ "type               til 2.2                            Wrong type. Also see 'limit";
+ "type/attr error                                       Direct update on disk for this type or attribute is not allowed";
+ "amending file";
+ "u-fail             `u#2 2                             Invalid attempt to set 'unique' attribute";
+ "unmappable         t:([]sym:`a`b;a:(();()))           When saving partitioned data each column must be mappable. () and ( \" \"; \" \"; \" \") are OK";
+ "                   .Q.dpft[`:thdb;.z.d;`sym;`t]";
+ "upd                                                   Function upd is undefined (sometimes encountered during -11!`:logfile) or license error";
+ "utf8                                                  The websocket requires that text is UTF-8 encoded";
+ "value                                                 No value";
+ "vd1                                                   Attempted multithread update";
+ "view                                                  Trying to re-assign a view to something else";
+ "wsfull              999999999#0j                      malloc failed, ran out of swap (or addressability on 32-bit), or hit -w limit";
+ "wsm                 010b wsum 010b                    Alias for nyi for wsum prior to V3.2";
+ "XXX                 delete x from system  \"d \";x        Value error (XXX undefined)";
  "";
- "parse errors (execute or load)";
- "[/(/{/]/)/}/\"            open ([{ or \"";
- "branch                   a branch(if;do;while;$[.;.;.]) more than 255 byte codes away";
- "char                     invalid character";
- "constants                too many constants (max 96)";
- "globals                  too many global variables (32 max)";
- "locals                   too many local variables (24 max)";
- "params                   too many parameters (8 max)";
+ "System errors (from file ops and IPC)";
+ "error------------example------------------------------explanation----------------------------------------------------------";
+ "XXX:YYY                                               XXX is from kdb+, YYY from the OS";
  "";
- "license errors";
- "cores                    too many cores";
- "exp                      expiry date passed";
- "host                     unlicensed host";
- "k4.lic                   k4.lic file not found, check QHOME/QLIC";
- "os                       unlicensed OS";
- "srv                      attempt to use client-only license in server mode ";
- "upd                      attempt to use version of kdb+ more recent than update date";
- "user                     unlicensed user";
- "wha                      invalid system date"
+ "Parse errors (on execute or load)";
+ "error------------example------------------------------explanation----------------------------------------------------------";
+ "[({])} \"           \"hello                               Open ([{ or  \"";
+ "branch           a: \"1; \",65024# \"0; \"                    A branch (if;do;while;$[.;.;.]) more than 65025 byte codes away (255 before V3.6 2017.09.26)";
+ "                 value  \"{if[ \",a, \"]} \"";
+ "char             value  \" \\000 \"                         Invalid character";
+ "globals          a: \"::a \"sv string til 111;            Too many global variables";
+ "                 value \"{a \",a, \"::0} \"";
+ "limit            a: \"; \"sv string 2+til 241;            Too many constants, or limit error";
+ "                 value \"{ \",a, \"} \"";
+ "locals           a: \":a \"sv string til 111;             Too many local variables";
+ "                 value \"{a \",a, \":0} \"";
+ "params           f:{[a;b;c;d;e;f;g;h;e]}              Too many parameters (8 max)";
+ "";
+ "License errors (on launch)";
+ "error------explanation----------------------------------------------------------";
+ "cores      The license is for fewer cores than available";
+ "cpu        The license is for fewer CPUs than available";
+ "exp        License expiry date is prior to system date";
+ "host       The hostname reported by the OS does not match the hostname or hostname-pattern in the license";
+ "k4.lic     k4.lic file not found";
+ "os         Wrong OS or operating-system error (if runtime error)";
+ "srv        Client-only license in server mode";
+ "upd        Version of kdb+ more recent than update date, or function upd undefined";
+ "user       Unlicenced user";
+ "wha        System date is prior to kdb+ version date";
+ "q)"
  )
 DIR,:(enlist`errors)!enlist`$"error messages"
+TXT,:(enlist`internal)!enlist(
+ "--n--wrapper-----------------------------------------------------------";
+ " 0N!         tee, output and return x";
+ " -1! hsym    handle from sym x - ensures prefixed with :";
+ " -2! attr    attributes of x";
+ " -3! .Q.s1   display x";
+ " -4!         tokens in string x";
+ " -5! parse   parse tree for string x ";
+ " -6! eval    evaluate parse tree x ";
+ " -7! hcount  size of file x (handle count)";
+ " -8!         byte representation of x";
+ " -9!         k value from byte representation x ";
+ "-10!         resolve type number x to enum";
+ "-11!         streaming execute file x";
+ " -11!logfile      streaming execute of entire logfile";
+ " -11!(n;logfile)  streaming execute of first n cells in logfile";
+ " -11!(-2;logfile) count valid cells in logfile";
+ "-12! .Q.host hostname from address x (.z.a)";
+ "-13! .Q.attr address from hostname x";
+ "-14!         escape \" in string x (for csvs)";
+ "-15! md5     MD5 for string x";
+ "-16!         reference count for x";
+ "-17!         read0 kdb+ file x from \"other\" endian ";
+ "-18!         compressed version of -8!";
+ "-19!         compress file (`:infile;`:outfile;blockSize;algo;zipLevel)";
+ "                           (  data  ;`:outfile;blockSize;algo;zipLevel)";
+ "-20! .Q.gc   garbage collect";
+ "-21!         compression information for file x";
+ "-22!         optimised shortcut for count -8!x ";
+ "-23!         map data into memory without copying ";
+ "-24! parse   like -5!, but in read-only mode ";
+ "-25!(handles;msg) async broadcast <msg> to multiple handles";
+ "-26!()       TLS settings for current process";
+ "-26!handle   TLS settings for handle";
+ "-29!x        JSON support internal"
+ )
+DIR,:(enlist`internal)!enlist`$"negative bang - -n!x - internal system calls"
+TXT,:(enlist`iterator)!enlist(
+ "map iterators";
+ "'    Each           v1 each x    x v2'y       v3[x;y;z]";
+ "/:   Each Right                  x v2/:y";
+ "\\:   Each Left                   x v2\\:y";
+ "':   Each Parallel  v1 peach x";
+ "':   Each Prior                  v2 prior y";
+ "'    Case           int'[x;y;z...]";
+ "accumulating iterators";
+ "\\    Scan           v1 scan x                             Converge, Do, While";
+ "/    Over                         x v2/y      v3/[x;y;z]  MapReduce";
+ "\\    Scan                         x v2\\y      v3\\[x;y;z]  Fold";
+ "/    Over           v1 over x                             Converge, Do, While"
+ )
+DIR,:(enlist`iterator)!enlist`$"iterators (formerly adverbs)"
+TXT,:(enlist`keyword)!enlist(
+ "A\t abs acos aj aj0 all and any asc asin asof atan attr avg avgs";
+ "B\t bin binr";
+ "C\t ceiling cols cor cos count cov cross csv cut";
+ "D\t delete deltas desc dev differ distinct div do dsave";
+ "E\t each ej ema enlist eval except exec exit exp";
+ "F\t fby fills first fkeys flip floor";
+ "G\t get getenv group gtime";
+ "H\t hclose hcount hdel hopen hsym";
+ "I\t iasc idesc if ij ijf in insert inter inv";
+ "K\t key keys";
+ "L\t last like lj ljf load log lower lsq ltime ltrim";
+ "M\t mavg max maxs mcount md5 mdev med meta min mins mmax mmin mmu mod msum";
+ "N\t neg next not null";
+ "O\t or over";
+ "P\t parse peach pj prd prds prev prior";
+ "R\t rand rank ratios raze read0 read1 reciprocal reval reverse rload rotate rsave rtrim";
+ "S\t save scan scov sdev select set setenv show signum sin sqrt ss ssr string sublist sum sums sv svar system";
+ "T\t tables tan til trim type";
+ "U\t uj ujf ungroup union update upper upsert";
+ "V\t value var view views vs";
+ "W\t wavg where while within wj wj1 wsum";
+ "X\t xasc xbar xcol xcols xdesc xexp xgroup xkey xlog xprev xrank"
+ )
+DIR,:(enlist`keyword)!enlist`$"keywords (functions)"
 TXT,:(enlist`kill)!enlist(
  "If the q session is responsive and listening on a port, you can try connecting ";
  "to it via ipc and calling \"exit 0\".";
@@ -318,43 +490,26 @@ TXT,:(enlist`lic)!enlist(
  "failover@kx.com can provide a temporary emergency license "
  )
 DIR,:(enlist`lic)!enlist`$"licenses - kdb+ license files "
-TXT,:(enlist`negbang)!enlist(
- "--n--wrapper-----------------------------------------------------------";
- " 0N!         tee, output and return x";
- " -1! hsym    handle from sym x - ensures prefixed with :";
- " -2! attr    attributes of x";
- " -3! .Q.s1   display x";
- " -4!         tokens in string x";
- " -5! parse   parse tree for string x ";
- " -6! eval    evaluate parse tree x ";
- " -7! hcount  size of file x (handle count)";
- " -8!         byte representation of x";
- " -9!         k value from byte representation x ";
- "-10!         resolve type number x to enum";
- "-11!         streaming execute file x";
- " -11!logfile      streaming execute of entire logfile";
- " -11!(n;logfile)  streaming execute of first n cells in logfile";
- " -11!(-2;logfile) count valid cells in logfile";
- "-12! .Q.host hostname from address x (.z.a)";
- "-13! .Q.attr address from hostname x";
- "-14!         escape \" in string x (for csvs)";
- "-15! md5     md5 for string x";
- "-16!         reference count for x";
- "-17!         read0 kdb+ file x from \"other\" endian ";
- "-18!         compressed version of -8!";
- "-19!         compress file (`:infile;`:outfile;blockSize;algo;zipLevel)";
- "                           (  data  ;`:outfile;blockSize;algo;zipLevel)";
- "-20! .Q.gc   garbage collect";
- "-21!         compression information for file x";
- "-22!         optimised shortcut for count -8!x ";
- "-23!         map data into memory without copying ";
- "-24! parse   like -5!, but in read-only mode ";
- "-25!(handles;msg) async broadcast <msg> to multiple handles";
- "-26!()       TLS settings for current process";
- "-26!handle   TLS settings for handle";
- "-29!x        json support internal"
+TXT,:(enlist`operator)!enlist(
+ "@   Apply/At      $   Cond        !    Dict             ?  Find";
+ ".   Index/At          Cast             Enkey               Roll, Deal";
+ "    Trap              Tok              Unkey               Enum Extend";
+ "    Amend             Enumerate        Enumeration         Select";
+ "                      Pad              Flip Splayed        Exec";
+ "                      mmu              Display             Simple Exec";
+ "                                       Internal            Vector Conditional";
+ "                                       Update";
+ "                                       Delete";
+ "";
+ "+   Add           -   Subtract     *   Multiply         %  Divide";
+ "";
+ "=   Equals        <   Less Than    >   Greater Than     ~  Match";
+ "<>  Not Equals    <=  Up To        >=  At Least";
+ "|   Greater, OR   &   Lesser, AND";
+ "";
+ "#   Take          _   Cut, Drop    ^   Fill             ,  Join"
  )
-DIR,:(enlist`negbang)!enlist`$"negative bang - -n!x - system calls"
+DIR,:(enlist`operator)!enlist`$"operators (functions)"
 TXT,:(enlist`save)!enlist(
  "tables can be written as a single file or spread across a directory, e.g.";
  "`:trade set x      / write as single file ";
@@ -427,34 +582,4 @@ TXT,:(enlist`temporal)!enlist(
  "`timespan$x ~ 0D20:39:35.614334000 ~ \"n\"$x ~ x.timespan"
  )
 DIR,:(enlist`temporal)!enlist`$"temporal - date & time casts"
-TXT,:(enlist`verbs)!enlist(
- "verb-infix-------prefix";
- "s:x  gets     :x idem";
- "i+i  plus     +l flip";
- "i-i  minus    -i neg";
- "i*i  times    *l first";
- "f%f  divide   %f reciprocal";
- "a&a  and      &B where";
- "a|a  or       |l reverse";
- "a^a  fill     ^a null";
- "a=a  equal    =l group";
- "a<a  less     <l iasc     <s(hopen)";
- "a>a  more     >l idesc    >i(hclose)";
- "c$a  cast s$  $a string   h$a \"C\"$C `$C";
- "l,l  cat      ,x enlist";
- "i#l  take     #l count";
- "i_l  drop     _a floor    sc(lower)";
- "x~x  match    ~a not      ~s(hdelete)";
- "l!l  xkey     !d key      !i (s;();S):!s";
- "A?a  find     ?l distinct rand([n]?bgxhijefcs)";
- "x@i  at   s@  @x type          trap amend(:+-*%&|,)";
- "x.l  dot  s.  .d value    .sCL trap dmend(:+-*%&|,)";
- "A bin a;a in A;a within(a;a);sC like C;sC ss sC";
- "{sqrt log exp sin cos tan asin acos atan}f";
- "last sum prd min max avg wsum wavg xbar";
- "exit getenv";
- "";
- "dependency::expression (when not in function definition)"
- )
-DIR,:(enlist`verbs)!enlist`$"verbs/functions"
 .q.help:.help.display

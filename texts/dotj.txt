@@ -1,0 +1,2 @@
+.j namespace: JSON
+.j.j     serialize                 .j.k         deserialize

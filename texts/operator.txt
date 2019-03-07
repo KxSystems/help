@@ -1,0 +1,18 @@
+operators (functions)
+@   Apply/At      $   Cond        !    Dict             ?  Find
+.   Index/At          Cast             Enkey               Roll, Deal
+    Trap              Tok              Unkey               Enum Extend
+    Amend             Enumerate        Enumeration         Select
+                      Pad              Flip Splayed        Exec
+                      mmu              Display             Simple Exec
+                                       Internal            Vector Conditional
+                                       Update
+                                       Delete
+
++   Add           -   Subtract     *   Multiply         %  Divide
+
+=   Equals        <   Less Than    >   Greater Than     ~  Match
+<>  Not Equals    <=  Up To        >=  At Least
+|   Greater, OR   &   Lesser, AND
+
+#   Take          _   Cut, Drop    ^   Fill             ,  Join

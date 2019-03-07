@@ -1,6 +1,8 @@
 Online help for kdb+
 ====================
 
+Updated for V2.0 of the [Reference](https://code.kx.com/v2/ref/) (2019.03.07)
+
 
 Install
 -------
@@ -11,52 +13,47 @@ Install
 
 Use
 ---
-```q
-q)help `
-adverb    | adverbs/operators
+
+```txt
 attributes| data attributes
 cmdline   | command line parameters
 data      | data types
 debug     | debug - debugger commands
 define    | assign, define, control and debug
-dotz      | .z locale contents
+doth      | .h namespace
+dotj      | .j namespace
+dotq      | .Q namespace
+dotz      | .z namespace
 envvar    | envvar - environment variables
 errors    | error messages
+internal  | negative bang - -n!x - internal system calls
+iterator  | iterators/operators
+keyword   | keywords/functions
 kill      | kill - killing a q session
 lic       | licenses - kdb+ license files
-negbang   | negative bang - -n!x - system calls
+operator  | operators/functions
 save      | save/load tables
 syscmd    | system commands
 temporal  | temporal - date & time casts
-verbs     | verbs/functions
-q)help `verbs
-verb-infix-------prefix
-s:x  gets     :x idem
-i+i  plus     +l flip
-i-i  minus    -i neg
-i*i  times    *l first
-f%f  divide   %f reciprocal
-a&a  and      &B where
-a|a  or       |l reverse
-a^a  fill     ^a null
-a=a  equal    =l group
-a<a  less     <l iasc     <s(hopen)
-a>a  more     >l idesc    >i(hclose)
-c$a  cast s$  $a string   h$a "C"$C `$C
-l,l  cat      ,x enlist
-i#l  take     #l count
-i_l  drop     _a floor    sc(lower)
-x~x  match    ~a not      ~s(hdelete)
-l!l  xkey     !d key      !i (s;();S):!s
-A?a  find     ?l distinct rand([n]?bgxhijefcs)
-x@i  at   s@  @x type          trap amend(:+-*%&|,)
-x.l  dot  s.  .d value    .sCL trap dmend(:+-*%&|,)
-A bin a;a in A;a within(a;a);sC like C;sC ss sC
-{sqrt log exp sin cos tan asin acos atan}f
-last sum prd min max avg wsum wavg xbar
-exit getenv
+q)
+q)help `operator
+@   Apply/At      $   Cond        !    Dict             ?  Find
+.   Index/At          Cast             Enkey               Roll, Deal
+    Trap              Tok              Unkey               Enum Extend
+    Amend             Enumerate        Enumeration         Select
+                      Pad              Flip Splayed        Exec
+                      mmu              Display             Simple Exec
+                                       Internal            Vector Conditional
+                                       Update
+                                       Delete
 
-dependency::expression (when not in function definition)
++   Add           -   Subtract     *   Multiply         %  Divide
+
+=   Equals        <   Less Than    >   Greater Than     ~  Match
+<>  Not Equals    <=  Up To        >=  At Least
+|   Greater, OR   &   Lesser, AND
+
+#   Take          _   Cut, Drop    ^   Fill             ,  Join
 q)
 ```
 
@@ -65,13 +62,6 @@ Customise
 ---------
 
 See `makehelp.q` and `texts/` to roll your own on-line help. 
-
-
-To do
------
-
-- [ ] Revise `` `adverb`` to correspond with [code.kx.com/q/ref/adverbs](http://code.kx.com/q/ref/adverbs) 
-- [ ] Revise `` `verbs`` to correspond with [code.kx.com/q/ref/elements/#operators](http://code.kx.com/q/ref/elements/#operators) 
 
 
 Contact
