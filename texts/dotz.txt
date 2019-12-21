@@ -1,27 +1,27 @@
 .z namespace: system information and callbacks
 System information                Callbacks
-.z.a    IP address                .z.ac    HTTP auth from cookie
-.z.b    dependencies              .z.bm    msg validator
-.z.c    cores                     .z.exit  action on exit
-.z.D/d  date shortcuts            .z.pc    close
-.z.e    TLS connection status     .z.pd    peach handles
-.z.ex   failed primitive          .z pg    get
-.z.ey   arg to failed primitive   .z.ph    HTTP get
-.z.f    file                      .z.pi    input
-.z.h    host                      .z.po    open
-.z.i    PID                       .z.pp    HTTP post
-.z.K    version                   .z.pq    qcon
-.z.k    release date              .z.ps    set
-.z.l    license                   .z.pw    validate user
-.z.N/n  local/UTC timespan        .z.ts    timer
-.z.o    OS version                .z.vs    value set
-.z.P/p  local/UTC timestamp       .z.wc    WebSocket close
-.z.pm   HTTP options              .z.wo    WebSocket open
-.z.q    quiet mode                .z.ws    WebSocket
-.z.s    self
-.z.T/t  time shortcuts
-.z.u    user ID
-.z.W/w  handles/handle
-.z.X/x  raw/parsed command line
-.z.Z/z  local/UTC datetime
-.z.zd   zip defaults
+ .z.a    IP address                .z.ac    HTTP auth from cookie
+ .z.b    dependencies              .z.bm    msg validator
+ .z.c    cores                     .z.exit  action on exit
+ .z.D/d  date shortcuts            .z.pc    close
+ .z.e    TLS connection status     .z.pd    peach handles
+ .z.ex   failed primitive          .z pg    get
+ .z.ey   arg to failed primitive   .z.ph    HTTP get
+ .z.f    file                      .z.pi    input
+ .z.h    host                      .z.po    open
+ .z.i    PID                       .z.pp    HTTP post
+ .z.K    version                   .z.pq    qcon
+ .z.k    release date              .z.ps    set
+ .z.l    license                   .z.pw    validate user
+ .z.N/n  local/UTC timespan        .z.ts    timer
+ .z.o    OS version                .z.vs    value set
+ .z.P/p  local/UTC timestamp       .z.wc    WebSocket close
+ .z.pm   HTTP options              .z.wo    WebSocket open
+ .z.q    quiet mode                .z.ws    WebSocket
+ .z.s    self
+ .z.T/t  time shortcuts
+ .z.u    user ID
+ .z.W/w  handles/handle
+ .z.X/x  raw/parsed command line 
+ .z.Z/z  local/UTC datetime
+ .z.zd   zip defaults

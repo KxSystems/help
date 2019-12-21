@@ -5,4 +5,4 @@ tables can be written as a single file or spread across a directory, e.g.
 trade:get`:trade   / read 
 trade:get`:trade/  / map columns on demand
 
-tables splayed across a directory must be fully enumerated(no varchar) and not keyed.
+tables splayed across a directory must be fully enumerated (no varchar) and not keyed.

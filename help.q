@@ -1,4 +1,4 @@
-/ help.q 2019.04.08T14:18:25.782
+/ help.q 2019.12.21T18:01:50.981
 \d .help
 DIR:TXT:()!()
 display:{if[not 10h=abs type x;x:string x];$[1=count i:where(key DIR)like x,"*";-1 each TXT[(key DIR)[i]];show DIR];}
@@ -153,101 +153,112 @@ TXT,:(enlist`define)!enlist(
  )
 DIR,:(enlist`define)!enlist`$"assign, define, control and debug"
 TXT,:(enlist`doth)!enlist(
- ".h.br    linebreak                 .h.http      hyperlinks";
- ".h.c0    web color                 .h.hu        URI escape";
- ".h.c1    web color                 .h.hug       URI map";
- ".h.cd    CSV from data             .h.hy        HTTP response";
- ".h.code  code after Tab            .h.iso8601   ISO timestamp";
- ".h.data                            .h.jx        table";
- ".h.ed    Excel from data           .h.logo      Kx logo";
- ".h.edsn  Excel from tables         .h.nbr       no break";
- ".h.fram  frame                     .h.pre       pre";
- ".h.ha    anchor                    .h.sa        style";
- ".h.hb    anchor target             .h.sb        style";
- ".h.hc    escape lt                 .h.sc        URI-safe";
- ".h.he    HTTP 400                  .h.td        TSV";
- ".h.hn    HTTP error                .h.text      paragraphs";
- ".h.hp    HTTP response             .h.tx        filetypes";
- ".h.hr    horizontal rule           .h.ty        MIME types";
- ".h.ht    Marqdown to HTML          .h.uh        URI unescape";
- ".h.hta   start tag                 .h.xd        XML";
- ".h.htac  element                   .h.xmp       XMP";
- ".h.htc   element                   .h.xs        XML escape";
- ".h.html  document                  .h.xt        JSON"
+ ".h.br    linebreak                 .h.hu       URI escape";
+ ".h.c0    web color                 .h.hug      URI map";
+ ".h.c1    web color                 .h.hy       HTTP response";
+ ".h.cd    CSV from data             .h.iso8601  ISO timestamp";
+ ".h.code  code after Tab            .h.jx       table";
+ ".h.ed    Excel from data           .h.logo     Kx logo";
+ ".h.edsn  Excel from tables         .h.nbr      no break";
+ ".h.fram  frame                     .h.pre      pre";
+ ".h.ha    anchor                    .h.sa       style";
+ ".h.hb    anchor target             .h.sb       style";
+ ".h.hc    escape lt                 .h.sc       URI-safe";
+ ".h.he    HTTP 400                  .h.td       TSV";
+ ".h.hn    HTTP error                .h.text     paragraphs";
+ ".h.hp    HTTP response             .h.tx       filetypes";
+ ".h.hr    horizontal rule           .h.ty       MIME types";
+ ".h.ht    Marqdown to HTML          .h.uh       URI unescape";
+ ".h.hta   start tag                 .h.val      value";
+ ".h.htac  element                   .h.xd       XML";
+ ".h.htc   element                   .h.xmp      XMP";
+ ".h.html  document                  .h.xs       XML escape";
+ ".h.http  hyperlinks                .h.xt       JSON"
  )
 DIR,:(enlist`doth)!enlist`$".h namespace: markup"
 TXT,:(enlist`dotj)!enlist(
- ".j.j     serialize                 .j.k         deserialize"
+ ".j.j     serialize                 .j.k         deserialize";
+ ".j.jd    seralize infinity"
  )
 DIR,:(enlist`dotj)!enlist`$".j namespace: JSON"
 TXT,:(enlist`dotq)!enlist(
- "General                                      Database";
- " .Q.addmonths                                 .Q.chk     fill HDB";
- " .Q.dd       join symbols                     .Q.dpft    save table";
- " .Q.def                                       .Q.dsftg   load process save";
- " .Q.f        format                           .Q.en      enumerate varchar cols";
- " .Q.fc       parallel on cut                  .Q.fps     streaming algorithm";
- " .Q.ff       append columns                   .Q.fs      streaming algorithm";
- " .Q.fk       foreign key                      .Q.fsn     streaming algorithm";
- " .Q.fmt      format                           .Q.hdpf    save tables";
- " .Q.ft       apply simple                     .Q.qt      is table";
- " .Q.fu       apply unique                     .Q.qp      is partitioned";
- " .Q.gc       garbage collect";
- " .Q.id       sanitize                         Partitioned database state";
- " .Q.s        plain text                       .Q.cn      count partitioned table";
- " .Q.V        table to dict                    .Q.bv      build vp";
- " .Q.v        value                            .Q.ind     partitioned index";
- " .Q.view     subview                          .Q.MAP     maps partitions";
- "                                              .Q.par     locate partition";
- "Environment                                   .Q.PD      partition locations";
- " .Q.k        version                          .Q.pd      modified partition locations";
- " .Q.opt      command parameters               .Q.pf      partition type";
- " .Q.res      k words                          .Q.pn      partition counts";
- " .Q.w        memory stats                     .Q.pt      partitioned tables";
- " .Q.x        non-command parameters           .Q.PV      partition values";
- "                                              .Q.pv      modified partition values";
- "IPC                                           .Q.vp      missing partitions";
- " .Q.addr     IP address";
- " .Q.hg       HTTP get                         Segmented database state";
- " .Q.host     hostname                         .Q.D       partitions";
- " .Q.hp       HTTP post                        .Q.P       segments";
- "                                              .Q.u       date based";
- "Datatype";
- " .Q.j10      encode binhex                   File I/O";
- " .Q.j12      encode base64                    .Q.l        load";
- " .Q.M        long infinity                    .Q.Cf       create empty nested char file";
- " .Q.ty       type                             .Q.Xf       create file";
- " .Q.x10      decode binhex";
- " .Q.x12      decode base64"
+ "General                              Datatype";
+ " .Q.a        lowercase alphabet       .Q.btoa   b64 encode";
+ " .Q.A        uppercase alphabet       .Q.j10    encode binhex";
+ " .Q.addmonths                         .Q.j12    encode base64";
+ " .Q.bt       backtrace                .Q.M      long infinity";
+ " .Q.dd       join symbols             .Q.ty     type";
+ " .Q.def                               .Q.x10    decode binhex";
+ " .Q.f        format                   .Q.x12    decode base64";
+ " .Q.fc       parallel on cut         ";
+ " .Q.ff       append columns          Database";
+ " .Q.fmt      format                   .Q.chk    fill HDB";
+ " .Q.ft       apply simple             .Q.dpft   save table";
+ " .Q.fu       apply unique             .Q.dpfts  save table with sym";
+ " .Q.gc       garbage collect          .Q.dsftg  load process save";
+ " .Q.id       sanitize                 .Q.en     enumerate varchar cols";
+ " .Q.qt       is table                 .Q.ens    enumerate against domain     ";
+ " .Q.res      keywords                 .Q.fk     foreign key";
+ " .Q.s        plain text               .Q.hdpf   save tables";
+ " .Q.s1       string representation    .Q.qt     is table";
+ " .Q.sbt      string backtrace         .Q.qp     is partitioned";
+ " .Q.sha1     SHA-1 encode            ";
+ " .Q.trp      extend trap             Partitioned database state";
+ " .Q.ts       time and space           .Q.bv     build vp";
+ " .Q.u        date based               .Q.cn     count partitioned table";
+ " .Q.V        table to dict            .Q.D      partitions";
+ " .Q.v        value                    .Q.ind    partitioned index";
+ " .Q.view     subview                  .Q.MAP    maps partitions";
+ "                                      .Q.par    locate partition";
+ "Environment                           .Q.PD     partition locations";
+ " .Q.k        version                  .Q.pd     modified partition locns";
+ " .Q.opt      command parameters       .Q.pf     partition field";
+ " .Q.res      k words                  .Q.pn     partition counts";
+ " .Q.w        memory stats             .Q.qp     is partitioned";
+ " .Q.x        non-command parameters   .Q.pt     partitioned tables";
+ "                                      .Q.PV     partition values";
+ "IPC                                   .Q.pv     modified partition values";
+ " .Q.addr     IP address               .Q.vp     missing partitions";
+ " .Q.fps      streaming algorithm     ";
+ " .Q.fs       streaming algorithm     Segmented database state";
+ " .Q.fsn      streaming algorithm      .Q.D      partitions";
+ " .Q.hg       HTTP get                 .Q.P      segments";
+ " .Q.host     hostname                 .Q.u      date based";
+ " .Q.hp       HTTP post               ";
+ " .Q.l        load                    ";
+ "";
+ " File I/O";
+ " .Q.Cf     create empty nested char file";
+ " .Q.Xf     create file"
  )
 DIR,:(enlist`dotq)!enlist`$".Q namespace: utilities"
 TXT,:(enlist`dotz)!enlist(
  "System information                Callbacks";
- ".z.a    IP address                .z.ac    HTTP auth from cookie";
- ".z.b    dependencies              .z.bm    msg validator";
- ".z.c    cores                     .z.exit  action on exit";
- ".z.D/d  date shortcuts            .z.pc    close";
- ".z.e    TLS connection status     .z.pd    peach handles";
- ".z.ex   failed primitive          .z pg    get";
- ".z.ey   arg to failed primitive   .z.ph    HTTP get";
- ".z.f    file                      .z.pi    input";
- ".z.h    host                      .z.po    open";
- ".z.i    PID                       .z.pp    HTTP post";
- ".z.K    version                   .z.pq    qcon";
- ".z.k    release date              .z.ps    set";
- ".z.l    license                   .z.pw    validate user";
- ".z.N/n  local/UTC timespan        .z.ts    timer";
- ".z.o    OS version                .z.vs    value set";
- ".z.P/p  local/UTC timestamp       .z.wc    WebSocket close";
- ".z.pm   HTTP options              .z.wo    WebSocket open";
- ".z.q    quiet mode                .z.ws    WebSocket";
- ".z.s    self";
- ".z.T/t  time shortcuts";
- ".z.u    user ID";
- ".z.W/w  handles/handle";
- ".z.X/x  raw/parsed command line";
- ".z.Z/z  local/UTC datetime";
- ".z.zd   zip defaults"
+ " .z.a    IP address                .z.ac    HTTP auth from cookie";
+ " .z.b    dependencies              .z.bm    msg validator";
+ " .z.c    cores                     .z.exit  action on exit";
+ " .z.D/d  date shortcuts            .z.pc    close";
+ " .z.e    TLS connection status     .z.pd    peach handles";
+ " .z.ex   failed primitive          .z pg    get";
+ " .z.ey   arg to failed primitive   .z.ph    HTTP get";
+ " .z.f    file                      .z.pi    input";
+ " .z.h    host                      .z.po    open";
+ " .z.i    PID                       .z.pp    HTTP post";
+ " .z.K    version                   .z.pq    qcon";
+ " .z.k    release date              .z.ps    set";
+ " .z.l    license                   .z.pw    validate user";
+ " .z.N/n  local/UTC timespan        .z.ts    timer";
+ " .z.o    OS version                .z.vs    value set";
+ " .z.P/p  local/UTC timestamp       .z.wc    WebSocket close";
+ " .z.pm   HTTP options              .z.wo    WebSocket open";
+ " .z.q    quiet mode                .z.ws    WebSocket";
+ " .z.s    self";
+ " .z.T/t  time shortcuts";
+ " .z.u    user ID";
+ " .z.W/w  handles/handle";
+ " .z.X/x  raw/parsed command line ";
+ " .z.Z/z  local/UTC datetime";
+ " .z.zd   zip defaults"
  )
 DIR,:(enlist`dotz)!enlist`$".z namespace: system information and callbacks"
 TXT,:(enlist`envvar)!enlist(
@@ -390,40 +401,25 @@ TXT,:(enlist`errors)!enlist(
  )
 DIR,:(enlist`errors)!enlist`$"error messages"
 TXT,:(enlist`internal)!enlist(
- "--n--wrapper-----------------------------------------------------------";
- " 0N!         tee, output and return x";
- " -1! hsym    handle from sym x - ensures prefixed with :";
- " -2! attr    attributes of x";
- " -3! .Q.s1   display x";
- " -4!         tokens in string x";
- " -5! parse   parse tree for string x ";
- " -6! eval    evaluate parse tree x ";
- " -7! hcount  size of file x (handle count)";
- " -8!         byte representation of x";
- " -9!         k value from byte representation x ";
- "-10!         resolve type number x to enum";
- "-11!         streaming execute file x";
- " -11!logfile      streaming execute of entire logfile";
- " -11!(n;logfile)  streaming execute of first n cells in logfile";
- " -11!(-2;logfile) count valid cells in logfile";
- "-12! .Q.host hostname from address x (.z.a)";
- "-13! .Q.attr address from hostname x";
- "-14!         escape \" in string x (for csvs)";
- "-15! md5     MD5 for string x";
- "-16!         reference count for x";
- "-17!         read0 kdb+ file x from \"other\" endian ";
- "-18!         compressed version of -8!";
- "-19!         compress file (`:infile;`:outfile;blockSize;algo;zipLevel)";
- "                           (  data  ;`:outfile;blockSize;algo;zipLevel)";
- "-20! .Q.gc   garbage collect";
- "-21!         compression information for file x";
- "-22!         optimised shortcut for count -8!x ";
- "-23!         map data into memory without copying ";
- "-24! reval   like -6!, but in read-only mode ";
- "-25!(handles;msg) async broadcast <msg> to multiple handles";
- "-26!()       TLS settings for current process";
- "-26!handle   TLS settings for handle";
- "-29!x        JSON support internal"
+ "-4!x        tokens                  Replaced:";
+ "-8!x        to bytes                 -1!   hsym";
+ "-9!x        from bytes               -2!   attr";
+ "-10!x       type enum                -3!   .Q.s1";
+ "-11!        streaming execute        -5!   parse";
+ "-14!x       quote escape             -6!   eval";
+ "-16!x       ref count                -7!   hcount";
+ "-17!x       flip endian-ess          -12!  .Q.host";
+ "-18!x       compress byte            -13!  .Q.addr";
+ "-19!        compress file            -15!  md5";
+ "-21!x       compression stats        -20!  .Q.gc";
+ "-22!x       uncompressed length      -24!  reval";
+ "-23!x       memory map               -29!  .j.k";
+ "-25!x       async broadcast          -31!  .j.jd";
+ "-26!x       SSL";
+ "-27!(x;y)   format";
+ "-30!x       deferred response";
+ "-33!x       SHA-1 hash";
+ "-120!x      domain"
  )
 DIR,:(enlist`internal)!enlist`$"negative bang - -n!x - internal system calls"
 TXT,:(enlist`iterator)!enlist(
@@ -442,7 +438,7 @@ TXT,:(enlist`iterator)!enlist(
  )
 DIR,:(enlist`iterator)!enlist`$"iterators (formerly adverbs)"
 TXT,:(enlist`keyword)!enlist(
- "A\t abs acos aj aj0 all and any asc asin asof atan attr avg avgs";
+ "A\t abs acos aj aj0 ajf ajf0 all and any asc asin asof atan attr avg avgs";
  "B\t bin binr";
  "C\t ceiling cols cor cos count cov cross csv cut";
  "D\t delete deltas desc dev differ distinct div do dsave";
@@ -517,7 +513,7 @@ TXT,:(enlist`save)!enlist(
  "trade:get`:trade   / read ";
  "trade:get`:trade/  / map columns on demand";
  "";
- "tables splayed across a directory must be fully enumerated(no varchar) and not keyed."
+ "tables splayed across a directory must be fully enumerated (no varchar) and not keyed."
  )
 DIR,:(enlist`save)!enlist`$"save/load tables"
 TXT,:(enlist`syscmd)!enlist(

@@ -1,39 +1,49 @@
 .Q namespace: utilities
-General                                      Database
- .Q.addmonths                                 .Q.chk     fill HDB
- .Q.dd       join symbols                     .Q.dpft    save table
- .Q.def                                       .Q.dsftg   load process save
- .Q.f        format                           .Q.en      enumerate varchar cols
- .Q.fc       parallel on cut                  .Q.fps     streaming algorithm
- .Q.ff       append columns                   .Q.fs      streaming algorithm
- .Q.fk       foreign key                      .Q.fsn     streaming algorithm
- .Q.fmt      format                           .Q.hdpf    save tables
- .Q.ft       apply simple                     .Q.qt      is table
- .Q.fu       apply unique                     .Q.qp      is partitioned
- .Q.gc       garbage collect
- .Q.id       sanitize                         Partitioned database state
- .Q.s        plain text                       .Q.cn      count partitioned table
- .Q.V        table to dict                    .Q.bv      build vp
- .Q.v        value                            .Q.ind     partitioned index
- .Q.view     subview                          .Q.MAP     maps partitions
-                                              .Q.par     locate partition
-Environment                                   .Q.PD      partition locations
- .Q.k        version                          .Q.pd      modified partition locations
- .Q.opt      command parameters               .Q.pf      partition type
- .Q.res      k words                          .Q.pn      partition counts
- .Q.w        memory stats                     .Q.pt      partitioned tables
- .Q.x        non-command parameters           .Q.PV      partition values
-                                              .Q.pv      modified partition values
-IPC                                           .Q.vp      missing partitions
- .Q.addr     IP address
- .Q.hg       HTTP get                         Segmented database state
- .Q.host     hostname                         .Q.D       partitions
- .Q.hp       HTTP post                        .Q.P       segments
-                                              .Q.u       date based
-Datatype
- .Q.j10      encode binhex                   File I/O
- .Q.j12      encode base64                    .Q.l        load
- .Q.M        long infinity                    .Q.Cf       create empty nested char file
- .Q.ty       type                             .Q.Xf       create file
- .Q.x10      decode binhex
- .Q.x12      decode base64
+General                              Datatype
+ .Q.a        lowercase alphabet       .Q.btoa   b64 encode
+ .Q.A        uppercase alphabet       .Q.j10    encode binhex
+ .Q.addmonths                         .Q.j12    encode base64
+ .Q.bt       backtrace                .Q.M      long infinity
+ .Q.dd       join symbols             .Q.ty     type
+ .Q.def                               .Q.x10    decode binhex
+ .Q.f        format                   .Q.x12    decode base64
+ .Q.fc       parallel on cut         
+ .Q.ff       append columns          Database
+ .Q.fmt      format                   .Q.chk    fill HDB
+ .Q.ft       apply simple             .Q.dpft   save table
+ .Q.fu       apply unique             .Q.dpfts  save table with sym
+ .Q.gc       garbage collect          .Q.dsftg  load process save
+ .Q.id       sanitize                 .Q.en     enumerate varchar cols
+ .Q.qt       is table                 .Q.ens    enumerate against domain     
+ .Q.res      keywords                 .Q.fk     foreign key
+ .Q.s        plain text               .Q.hdpf   save tables
+ .Q.s1       string representation    .Q.qt     is table
+ .Q.sbt      string backtrace         .Q.qp     is partitioned
+ .Q.sha1     SHA-1 encode            
+ .Q.trp      extend trap             Partitioned database state
+ .Q.ts       time and space           .Q.bv     build vp
+ .Q.u        date based               .Q.cn     count partitioned table
+ .Q.V        table to dict            .Q.D      partitions
+ .Q.v        value                    .Q.ind    partitioned index
+ .Q.view     subview                  .Q.MAP    maps partitions
+                                      .Q.par    locate partition
+Environment                           .Q.PD     partition locations
+ .Q.k        version                  .Q.pd     modified partition locns
+ .Q.opt      command parameters       .Q.pf     partition field
+ .Q.res      k words                  .Q.pn     partition counts
+ .Q.w        memory stats             .Q.qp     is partitioned
+ .Q.x        non-command parameters   .Q.pt     partitioned tables
+                                      .Q.PV     partition values
+IPC                                   .Q.pv     modified partition values
+ .Q.addr     IP address               .Q.vp     missing partitions
+ .Q.fps      streaming algorithm     
+ .Q.fs       streaming algorithm     Segmented database state
+ .Q.fsn      streaming algorithm      .Q.D      partitions
+ .Q.hg       HTTP get                 .Q.P      segments
+ .Q.host     hostname                 .Q.u      date based
+ .Q.hp       HTTP post               
+ .Q.l        load                    
+
+ File I/O
+ .Q.Cf     create empty nested char file
+ .Q.Xf     create file

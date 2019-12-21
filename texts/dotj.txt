@@ -1,2 +1,3 @@
 .j namespace: JSON
 .j.j     serialize                 .j.k         deserialize
+.j.jd    seralize infinity

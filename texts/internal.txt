@@ -1,35 +1,20 @@
 negative bang - -n!x - internal system calls
---n--wrapper-----------------------------------------------------------
- 0N!         tee, output and return x
- -1! hsym    handle from sym x - ensures prefixed with :
- -2! attr    attributes of x
- -3! .Q.s1   display x
- -4!         tokens in string x
- -5! parse   parse tree for string x 
- -6! eval    evaluate parse tree x 
- -7! hcount  size of file x (handle count)
- -8!         byte representation of x
- -9!         k value from byte representation x 
--10!         resolve type number x to enum
--11!         streaming execute file x
- -11!logfile      streaming execute of entire logfile
- -11!(n;logfile)  streaming execute of first n cells in logfile
- -11!(-2;logfile) count valid cells in logfile
--12! .Q.host hostname from address x (.z.a)
--13! .Q.attr address from hostname x
--14!         escape " in string x (for csvs)
--15! md5     MD5 for string x
--16!         reference count for x
--17!         read0 kdb+ file x from "other" endian 
--18!         compressed version of -8!
--19!         compress file (`:infile;`:outfile;blockSize;algo;zipLevel)
-                           (  data  ;`:outfile;blockSize;algo;zipLevel)
--20! .Q.gc   garbage collect
--21!         compression information for file x
--22!         optimised shortcut for count -8!x 
--23!         map data into memory without copying 
--24! reval   like -6!, but in read-only mode 
--25!(handles;msg) async broadcast <msg> to multiple handles
--26!()       TLS settings for current process
--26!handle   TLS settings for handle
--29!x        JSON support internal
+-4!x        tokens                  Replaced:
+-8!x        to bytes                 -1!   hsym
+-9!x        from bytes               -2!   attr
+-10!x       type enum                -3!   .Q.s1
+-11!        streaming execute        -5!   parse
+-14!x       quote escape             -6!   eval
+-16!x       ref count                -7!   hcount
+-17!x       flip endian-ess          -12!  .Q.host
+-18!x       compress byte            -13!  .Q.addr
+-19!        compress file            -15!  md5
+-21!x       compression stats        -20!  .Q.gc
+-22!x       uncompressed length      -24!  reval
+-23!x       memory map               -29!  .j.k
+-25!x       async broadcast          -31!  .j.jd
+-26!x       SSL
+-27!(x;y)   format
+-30!x       deferred response
+-33!x       SHA-1 hash
+-120!x      domain

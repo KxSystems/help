@@ -1,5 +1,5 @@
 keywords (functions)
-A	 abs acos aj aj0 all and any asc asin asof atan attr avg avgs
+A	 abs acos aj aj0 ajf ajf0 all and any asc asin asof atan attr avg avgs
 B	 bin binr
 C	 ceiling cols cor cos count cov cross csv cut
 D	 delete deltas desc dev differ distinct div do dsave
